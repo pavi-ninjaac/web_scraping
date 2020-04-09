@@ -1,0 +1,28 @@
+import requests as r
+from bs4 import BeautifulSoup
+
+url='https://realpython.com/beautiful-soup-web-scraper-python/'
+html=r.get(url)
+print(html)
+soup = BeautifulSoup(html.content, 'html.parser')
+results = soup.find_all('div',class_='highlight python')
+for re in results:
+    im=re.find('span', class_='kn')
+    url=re.find('span', class_='s1')
+    if None in (im,url):
+        continue
+    print(im.text.strip())
+    print(url.text)
+'''
+job_elems = results.find_all('section', class_='card-content')
+for job_elem in job_elems:
+    title_elem = job_elem.find('h2', class_='title')
+    company_elem = job_elem.find('div', class_='company')
+    location_elem = job_elem.find('div', class_='location')
+    if None in (title_elem, company_elem, location_elem):
+        continue
+    print(title_elem.text.strip())
+    print(company_elem.text.strip())
+    print(location_elem.text.strip())
+    print()
+'''
